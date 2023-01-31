@@ -2,16 +2,22 @@ package pages;
 
 import data.PageUrlPaths;
 import data.Time;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage extends CommonLoggedOutPage {
 
 
         private final String LOGIN_PAGE_URL = getPageURl(PageUrlPaths.LOGIN_PAGE);
 
+       private final By usernameTextFieldLocator = By.id("username");
+       private final By passwordTextFieldLocator = By.id("password");
 
 
-        public LoginPage (WebDriver driver) {
+
+
+    public LoginPage (WebDriver driver) {
             super(driver);
             log.trace("new LoginPAge()");
         }
@@ -39,14 +45,20 @@ public class LoginPage extends CommonLoggedOutPage {
 
         public void clickLoginButton() {
 
-
     }
 
+        public boolean isUsernameTextFieldDisplayed () {
+        log.debug("isUsernameTextFieldDisplayed()");
+        return isWebElementDisplayed(usernameTextFieldLocator);
 
-
-/*
-        public void clickLoginButton () {
-            WebDriverWait wait = new WebDriverWait(driver, 5);
         }
-*/
+
+
+        public void typeUserName (String sUsername) {
+        log.debug("typeUsername(" + sUsername + ")");
+        WebElement usernameTextField = getWebElement(usernameTextFieldLocator, Time.TIME_SHORT);
+        usernameTextField.sendKeys(sUsername);
+        }
+
+
 }

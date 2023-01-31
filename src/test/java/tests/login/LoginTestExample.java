@@ -13,13 +13,17 @@ import utils.DateTimeUtils;
 
 public class LoginTestExample extends BaseTestClass {
 
+
+
+
     @Test
     public void testExample1 () {
        WebDriver driver = setUpDriver();
 
        LoginPage loginPage = new LoginPage(driver).open();
        DateTimeUtils.wait(5);
-       //loginPage.clickLoginButton();
+       loginPage.typeUserName("Petar");
+
        quitDriver(driver);
 
 

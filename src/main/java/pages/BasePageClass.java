@@ -1,9 +1,7 @@
 package pages;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.openqa.selenium.JavascriptException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,7 +15,7 @@ import java.util.function.Function;
 
 public abstract class BasePageClass extends LoggerUtils {
 
-    private WebDriver driver;
+    protected WebDriver driver;
     private static final String BASE_URL = PropertiesUtils.getBaseUrl();
 
     protected BasePageClass(WebDriver driver) {
@@ -43,8 +41,33 @@ public abstract class BasePageClass extends LoggerUtils {
 
     }
 
-    private WebDriverWait getWebDriverWait (int timeout) {
+    protected WebElement getWebElement (By locator) {
+        log.trace("getWebElement(" + locator + ")");
+        return driver.findElement(locator);
+    }
 
+    protected WebElement getWebElement (By locator, int timeout) {
+        log.trace("getWebElement(" + locator + ", " + timeout + ")");
+        WebDriverWait wait = getWebDriverWait(timeout);
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+    }
+
+    protected boolean isWebElementDisplayed (By locator) {
+        log.trace("isWebElementDisplayed(" + locator + ")");
+        try {
+            WebElement element = getWebElement(locator);
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    protected boolean isWebElementDisplayed (WebElement element) {
+
+        return element.isDisplayed();
+    }
+
+    private WebDriverWait getWebDriverWait (int timeout) {
         return new WebDriverWait(driver, Duration.ofSeconds(timeout));
 
     }
