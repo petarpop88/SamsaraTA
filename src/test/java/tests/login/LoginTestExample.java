@@ -1,5 +1,6 @@
 package tests.login;
 
+import data.Time;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,11 @@ public class LoginTestExample extends BaseTestClass {
        WebDriver driver = setUpDriver();
 
        LoginPage loginPage = new LoginPage(driver).open();
-       DateTimeUtils.wait(5);
+       DateTimeUtils.wait(Time.TIME_SHORT);
        loginPage.typeUserName("Petar");
+       DateTimeUtils.wait(Time.TIME_LONG);
+       String username = loginPage.getUserName();
+       log.info("Username: " + username);
 
        quitDriver(driver);
 

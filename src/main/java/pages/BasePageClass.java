@@ -53,6 +53,34 @@ public abstract class BasePageClass extends LoggerUtils {
 
     }
 
+    protected void typeTextToWebElement (WebElement element, String text) {
+        log.trace("typeTextToWebElement(" + element + ", " + text + ")");
+        element.sendKeys(text);
+    }
+
+    protected void clearAndTypeTextToWebElement (WebElement element, String text) {
+        log.trace("clearAndTypeTextToWebElement(" + element + ", " + text + ")");
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    protected String getAttributeFromWebElement (WebElement element, String attribute) {
+        log.trace("getAttributeFromWebElement(" + element + ", " + attribute + ")");
+        return element.getAttribute(attribute);
+    }
+
+    protected String getValueFromWebElement (WebElement element) {
+        log.trace("getAttributeFromWebElement(" + element + ")");
+        return getAttributeFromWebElement(element, "value");
+    }
+
+    protected String getValueFromWebElementJS (WebElement element) {
+
+        log.trace("getValueFromWebElementJS(" + element + ")");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return (String) js.executeScript("return arguments[0].value", element);
+    }
+
     protected boolean isWebElementDisplayed (By locator) {
         log.trace("isWebElementDisplayed(" + locator + ")");
         try {
@@ -63,9 +91,14 @@ public abstract class BasePageClass extends LoggerUtils {
         }
     }
     protected boolean isWebElementDisplayed (WebElement element) {
-
-        return element.isDisplayed();
+        log.trace("isWebElementDisplayed(" + element + ")");
+        try {
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
+
 
     private WebDriverWait getWebDriverWait (int timeout) {
         return new WebDriverWait(driver, Duration.ofSeconds(timeout));
@@ -86,5 +119,8 @@ public abstract class BasePageClass extends LoggerUtils {
         return wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete")
         );
     }
+
+
+
 
 }
