@@ -1,6 +1,7 @@
 package tests.login;
 
 import data.Time;
+import io.restassured.RestAssured;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,9 @@ public class LoginTestExample extends BaseTestClass {
        log.info("Username: " + username);
 
        quitDriver(driver);
+
+        RestAssured rest = new RestAssured();
+
 
 
     }

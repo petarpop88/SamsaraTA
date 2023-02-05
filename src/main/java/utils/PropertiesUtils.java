@@ -14,6 +14,7 @@ public class PropertiesUtils extends LoggerUtils {
     private static final String sPropertiesPath = "common.properties";
     private static final Properties properties = loadPropertiesFile();
 
+
     public static Properties loadPropertiesFile(String sFilePath) {
         InputStream inputStream = PropertiesUtils.class.getClassLoader().getResourceAsStream(sFilePath);
         Properties properties = new Properties();
