@@ -144,6 +144,7 @@ public class User {
     public Date getCreatedAt() {
         if (this.createdAt == null) {
             return null;
+
         }
       return DateTimeUtils.getDateTime(this.createdAt);
 

@@ -52,6 +52,14 @@ public class PropertiesUtils extends LoggerUtils {
         return getProperty("environment");
     }
 
+    public static String getAdminUsername() {
+        return getProperty("adminUsername");
+    }
+
+    public static String getAdminPassword() {
+        return getProperty("adminPassword");
+    }
+
     public static boolean getRemote() {
         String sRemote = getProperty("remote").toLowerCase();
         if (!(sRemote.equals("true") || sRemote.equals("false"))) {

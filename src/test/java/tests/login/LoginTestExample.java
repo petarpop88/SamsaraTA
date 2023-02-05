@@ -31,7 +31,7 @@ public class LoginTestExample extends BaseTestClass {
 
        quitDriver(driver);
 
-        RestAssured rest = new RestAssured();
+
 
 
 
