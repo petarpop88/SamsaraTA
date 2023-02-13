@@ -12,9 +12,11 @@ public class LoginPage extends CommonLoggedOutPage {
 
     private final String LOGIN_PAGE_URL = getPageURl(PageUrlPaths.LOGIN_PAGE);
 
+    private final String loginBoxLocatorString = "//div[@id='loginbox']";
+    // Locators
     private final By usernameTextFieldLocator = By.id("username");
     private final By passwordTextFieldLocator = By.id("password");
-
+    private final By loginButtonLocator = By.xpath(loginBoxLocatorString + "//input[contains(@class,'btn-primary')]");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -66,6 +68,32 @@ public class LoginPage extends CommonLoggedOutPage {
         WebElement usernameTextField = getWebElement(usernameTextFieldLocator);
         return getValueFromWebElementJS(usernameTextField);
     }
+
+    public boolean isPasswordTextFieldDisplayed() {
+        log.debug("isPasswordTextFieldDisplayed()");
+        return isWebElementDisplayed(passwordTextFieldLocator);
+    }
+
+    public LoginPage typePassword(String sPassword) {
+        log.debug("typePassword(" + sPassword + ")");
+        Assert.assertTrue(isPasswordTextFieldDisplayed(), "Password Text Field is NOT present on Login Page!");
+        WebElement passwordTextField = getWebElement(passwordTextFieldLocator);
+        clearAndTypeTextToWebElement(passwordTextField, sPassword);
+        return this;
+    }
+
+    public String getPassword() {
+        log.debug("getPassword()");
+        Assert.assertTrue(isPasswordTextFieldDisplayed(), "Password Text Field is NOT present on Login Page!");
+        WebElement passwordTextField = getWebElement(passwordTextFieldLocator);
+        return getValueFromWebElement(passwordTextField);
+    }
+
+    public boolean isLoginButtonDisplayed() {
+        log.debug("isLoginButtonDisplayed()");
+        return isWebElementDisplayed(loginButtonLocator);
+    }
+
 
 
 }

@@ -90,6 +90,7 @@ public abstract class BasePageClass extends LoggerUtils {
             return false;
         }
     }
+
     protected boolean isWebElementDisplayed (WebElement element) {
         log.trace("isWebElementDisplayed(" + element + ")");
         try {
